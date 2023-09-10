@@ -91,5 +91,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script>
+        const csrf_token = "{{ csrf_token }}"; 
+    </script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 {% endblock %}

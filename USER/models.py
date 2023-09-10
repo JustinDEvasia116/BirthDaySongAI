@@ -29,7 +29,6 @@ class Profiles(models.Model):
     movie = models.CharField(blank=True, null=True)
     sport = models.CharField(blank=True, null=True)
     smile = models.CharField(blank=True, null=True)
-    
     audio_file = models.FileField(upload_to='assets/audiofiles/', blank=True, null=True)
 
     def __str__(self):

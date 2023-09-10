@@ -28,6 +28,7 @@ def Registration(request):
 
 @login_required(login_url='register')
 def Add_details(request):
+    
     if request.method == 'POST':
         user = request.user
         name = request.POST.get('name')
@@ -52,6 +53,11 @@ def Add_details(request):
 
 @login_required(login_url='register')
 def Choices(request):
+    user = request.user
+    try:
+        profile = Profiles.objects.filter(user=user).latest("id")
+    except Profiles.DoesNotExist:
+        return redirect('addnew')
     if request.method == 'POST':
         selected_mood = request.POST.get('mood')
         selected_genre = request.POST.get('genre')
@@ -70,53 +76,66 @@ def Choices(request):
     # Handle other cases (e.g., GET requests) if needed
     return render(request, 'frame3.html')
 
-
+openai.api_key = settings.GPT3_SECRET_API
 def Availdetail(request):
     user = request.user
     try:
         profile = Profiles.objects.filter(user=user).latest("id")
     except Profiles.DoesNotExist:
-        return redirect('addnew')  
+        # Profile does not exist for this user, so redirect to "addnew"
+        return redirect('addnew')  # Replace 'addnew' with the actual URL name for your "addnew" view
     
     if request.method == "POST":
-        profile.petname = request.POST.get("petname")
-        profile.angry = request.POST.get("angry")
-        profile.funny = request.POST.get("funny")
-        profile.movie = request.POST.get("movie")
-        profile.sport = request.POST.get("sport")
-        profile.smile = request.POST.get("smile")
-        profile.save()
-        return JsonResponse({'success': True})
-    return render(request,'frame4.html')
- 
-openai.api_key = settings.GPT3_SECRET_API
-def generate_lyrics(request):
-    user = request.user
-    try:
-        profile = Profiles.objects.filter(user=user).latest("id")
-    except Profiles.DoesNotExist:
-        # Handle the case where the user's profile does not exist
-        return redirect("addnew") 
-    
-    if request.method == "GET":
-        full_name = profile.full_name
-        age = profile.age
-        gender = profile.gender
-        mood = profile.mood
-        genre = profile.genre
-        petname = profile.petname
-        angry = profile.angry
-        funny = profile.funny
-        movie = profile.movie
-        sport = profile.sport
-        smile = profile.smile   
-        
+        if profile.generated_lyrics is None:
+            # If generated_lyrics is None, fetch values from request.POST
+            petname = request.POST.get("petname")
+            angry = request.POST.get("angry")
+            funny = request.POST.get("funny")
+            movie = request.POST.get("movie")
+            sport = request.POST.get("sport")
+            smile = request.POST.get("smile")
+            
+            # Update the profile object with the new values
+            profile.petname = petname
+            profile.angry = angry
+            profile.funny = funny
+            profile.movie = movie
+            profile.sport = sport
+            profile.smile = smile
+            
+            # Save the updated profile
+            profile.save()
+        else:
+            # Use values from the profile object
+            petname = profile.petname
+            angry = profile.angry
+            funny = profile.funny
+            movie = profile.movie
+            sport = profile.sport
+            smile = profile.smile
+
+        # Assuming you have access to the user making the request
+        user = request.user  # Replace with how you get the user making the request
+
+        # Fetch user-specific profile data
+        try:
+            profile = Profiles.objects.filter(user=user).latest("id")
+            full_name = profile.full_name
+            print(full_name)
+            age = profile.age
+            gender = profile.gender
+            mood = profile.mood
+            genre = profile.genre
+        except Profiles.DoesNotExist:
+            # Handle the case where the user's profile does not exist
+            return redirect(request, "addnew")
+
         # Dynamically create the input script with the requirement for at least two "Happy birthday" lines
         input_script = f"""
-        Wish a happy birthday  to {full_name}.
+Wish a happy birthday  to {full_name}.
 
 
-        """
+"""
 
         # Generate lyrics using the input script
         response = openai.Completion.create(
@@ -126,16 +145,42 @@ def generate_lyrics(request):
             n=1,  # Number of completions
             stop=None,
             temperature=0.7,  # Adjust for creativity
-            )
+        )
 
-            # Extract the generated lyrics from the response
+        # Extract the generated lyrics from the response
         gpt_response = response.choices[0].text.strip()
         generated_lyrics =(str(gpt_response))
         print("gpt worked")
         print(generated_lyrics)
         profile.generated_lyrics = generated_lyrics
         profile.save()
-        return render(request, "frame5.html", {'generated_lyrics': generated_lyrics})
+        # Return the generated lyrics as a JSON response
+        return JsonResponse({'success': True})
+    else:
+        return render(request, "frame4.html")
+
+
+def generate_lyrics(request):
+    user = request.user
+    try:
+        profile = Profiles.objects.filter(user=user).latest("id")
+        
+    except Profiles.DoesNotExist:
+        return redirect('addnew')
+    if request.method == "GET":
+        # Assuming you have access to the user making the request
+        user = request.user  # Replace with how you get the user making the request
+
+        # Fetch user-specific profile data
+        try:
+            profile = Profiles.objects.filter(user=user).latest("id")
+            generated_lyrics = profile.generated_lyrics
+
+            # Render the HTML page with the retrieved lyrics
+            return render(request, "frame5.html", {'generated_lyrics': generated_lyrics})
+        except Profiles.DoesNotExist:
+            # Handle the case where the user's profile does not exist
+            return redirect("addnew")  # Redirect to the "addnew" page or the appropriate URL
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
@@ -147,7 +192,7 @@ def generate_audio(request):
         generated_lyrics = profile.generated_lyrics
         full_name = profile.full_name
     except Profiles.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'User profile not found'})
+        return redirect('addnew')
 
     # Convert the lyrics to audio using gTTS and specify the content type as MP3
     tts = gTTS(text=generated_lyrics, lang='en', lang_check=False, slow=False)
@@ -170,7 +215,7 @@ def Playsong(request):
         profile = Profiles.objects.filter(user=user).latest("id")
         audio_file_url = profile.audio_file.url
     except Profiles.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'User profile not found'})
+        return redirect('addnew')
 
     return render(request, 'frame6.html', {'audio_file_url': audio_file_url})
 
@@ -236,3 +281,10 @@ def verify_otp(request):
         else:
             # If no account with the provided phone number is found, return an error response
             return JsonResponse({'success': False, 'message': 'Account not found'})
+
+def create_again(request):
+    if request.user.is_authenticated:
+        # Delete profiles associated with the authenticated user
+        Profiles.objects.filter(user=request.user).delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})

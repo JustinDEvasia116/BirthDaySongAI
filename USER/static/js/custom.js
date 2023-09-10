@@ -313,7 +313,43 @@ $(document).ready(function () {
             }
         });
     });
-    
+    $(function () {
+        $("#recreate_btn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/detail/",
+                data: {
+                    csrfmiddlewaretoken: csrf_token // Include your CSRF token
+                },
+                success: function () {
+                    window.location.href = "/lyrics/";
+                },
+                error: function () {
+                    alert("An error occurred while sending the request.");
+                }
+            });
+        });
+    });
+    $(function () {
+        $("#btn_create").click(function () {
+            // Send an AJAX request to the Django view to remove profiles
+            $.ajax({
+                type: "POST",
+                url: "/create_again/",
+                data: {
+                    csrfmiddlewaretoken: csrf_token // Include your CSRF token
+                },  // Replace with the actual URL for your view
+                success: function () {
+                    // Redirect to 'frame2.html' after successfully removing profiles
+                    window.location.href = "/addnew/";
+                },
+                error: function () {
+                    alert("An error occurred while sending the request.");
+                }
+            });
+        });
+    });
+
 
     $(function () {
         $(window).on("load", function () {

@@ -15,7 +15,7 @@ urlpatterns = [
     path("detail/",views.Availdetail,name="detail"),
     path("lyrics/",views.generate_lyrics,name="lyrics"),
     path("audio/",views.generate_audio,name="audio"),
-    
     path("play/",views.Playsong,name="play"),
+    path("create_again/",views.create_again,name="create_again"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

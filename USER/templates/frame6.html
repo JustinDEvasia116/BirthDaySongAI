@@ -90,7 +90,7 @@
         </div>
         <div class="btn_block">
             <button class="btn btn_secondary" id="btn_redeem">Redeem Gift</button>
-            <button class="btn btn_secondary">Create Again</button>
+            <button class="btn btn_secondary" id = "btn_create" >Create Again</button>
         </div>
     </div>
 </div>
@@ -123,6 +123,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+<script>
+    const csrf_token = "{{ csrf_token }}"; 
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var playButton = document.getElementById("play");
