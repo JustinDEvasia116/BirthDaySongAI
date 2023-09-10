@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+    HTML+CSS webpage
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link type="text/css" rel="stylesheet" href= {% static 'css/custom.css' %}>
+{% endblock %}
+
+{% block content %}
+<header>
+    <div class="inner_header">
+        <a href="javascript:void(0)">
+            <img src= {% static 'img/logo.png' %} class="img_logo"/>
+        </a>
+        <div class="topnav">
+            <button type="button" class="btn_menuhamburger" id="btn_menuhamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="overlay"></div>
+            <div class="right_sidebar" id="right_sidebar">
+                <a class="btn_close" id="btn_close">&times;</a>
+                <ul class="list_unstyled">
+                    <li>
+                        <a href="javascript:void(0)">How to participate</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Contact Us </a>
+                    </li>
+                </ul>
+                <div class="foot">
+                    <img src="https://icon-library.com/images/photo-placeholder-icon/photo-placeholder-icon-14.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main_content">
+    <ul class="list_step">
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_current"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+    </ul>
+    <h3 class="subtitle">Tell us a little more about them...</h3>
+    <div class="wallpaper_block" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
+     <div class="festoon_block">
+        <img src= {% static 'img/festoon.png' %}/>
+     </div>
+     <div class="question_block">
+        <img src={% static 'img/question.png' %} />
+     </div>
+     <div class="balloon_block">
+        <img src= {% static 'img/balloonlight.png' %}/>
+     </div>
+    </div>
+    <div class="list_content">
+        <div class="mCustomScrollbar">
+        <div class="fill_form">
+                <div class="group_block">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input" name="phone" id="phone" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" name="name" id="name" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  name="email" id="email" type="email" placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="group_block" style="display: none;">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input" name="text" id="phone" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  type="text" placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="group_block" style="display: none;">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input"  type="text" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  type=" name="name" id="name" " placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="group_block" style="display: none;">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input"  type="text" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  type=" name="name" id="name" " placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="group_block" style="display: none;">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input"  type="text" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  type=" name="name" id="name" " placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="group_block" style="display: none;">
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What's your pet name for them?</label>
+                        <input class="field_input"  type="text" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="xxxxxxxxx"/>
+                        <span id="phone"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What make them angry</label>
+                        <input class="field_input" type="text" placeholder="xxxxxxxxx"/>
+                        <span id="name"></span>
+                    </div>
+                    <div class="field_group">
+                        <label class="field_lbl" style="text-align:center;">What is the funniest thing they do?</label>
+                        <input class="field_input"  type=" name="name" id="name" " placeholder="xxxxxxxxx"/>
+                        <span id="email"></span>
+                    </div>
+                </div>
+                <div class="btn_block">
+                    <button class="btn btn_primary loadmore" id="loadmore">Answer More</button>
+                    <button class="btn btn_secondary"  onclick="window.location.href='./frame5.html'">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="addEventModal">
+    <div class="modal_overlay">
+        <div class="modal_content">
+            <h2 class="headtitle">Enter OTP</h2>
+            <form class="modal_fill">
+                <ul class="list_unstyled">
+                    <li>
+                        <input type="number" maxlength="1" class="field_input">
+                    </li>
+                    <li>
+                        <input type="number" maxlength="1" class="field_input">
+                    </li>
+                    <li>
+                        <input type="number" maxlength="1" class="field_input">
+                    </li>
+                    <li>
+                        <input type="number" maxlength="1" class="field_input">
+                    </li>
+                </ul>
+                <a href="javascript:void(0)" class="link_otp">Resend OTP</a>
+                <div class="btn_block">
+                    <button class="btn_secondary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src= {% static 'js/custom.js' %}></script>
+{% endblock %}

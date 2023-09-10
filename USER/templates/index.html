@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    HTML+CSS Webpage
+{% endblock %}
+
+{% block css_files %}
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+   
+    {% comment %} <link type="text/css" rel="stylesheet" href="css/custom.css"> {% endcomment %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="splash_block">
+        <div class="splash_inner" data-aos="fade-up">
+            {% comment %} <img src="img/wallpaper-splash.png"/> {% endcomment %}
+            <img src="{% static 'img/wallpaper-splash.png' %}" alt="Splash Image">
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    {% comment %} <script type="text/javascript" src="js/custom.js"></script> {% endcomment %}
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+    <script type="text/javascript">
+ // START FOR SPLASH SCREEN LOADING
+ $(function(){
+    $('.bg_darkblue .splash_block').hide();
+
+    // Delayed redirection after 2000ms (2 seconds)
+    setTimeout(function() {
+        window.location.href = 'register'; // Make sure the path is correct
+    }, 2000);
+
+    // Fading out the splash screen after 1000ms (1 second)
+    $('.bg_darkblue .splash_block').fadeIn(1000, function() {
+        window.setTimeout(function() {
+            $('.bg_darkblue').fadeOut(500, function() {
+                window.location.href = 'register'; // Make sure the path is correct
+            });
+        }, 1000);
+    });
+});
+    </script>
+{% endblock %}

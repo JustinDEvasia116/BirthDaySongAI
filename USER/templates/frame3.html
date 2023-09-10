@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+    <title>HTML+CSS webpage</title>
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<header>
+    <div class="inner_header">
+        <a href="javascript:void(0)">
+            <img src= {% static "img/logo.png" %}  class="img_logo"/>
+        </a>
+        <div class="topnav">
+            <button type="button" class="btn_menuhamburger" id="btn_menuhamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="overlay"></div>
+            <div class="right_sidebar" id="right_sidebar">
+                <a class="btn_close" id="btn_close">&times;</a>
+                <ul class="list_unstyled">
+                    <li>
+                        <a href="javascript:void(0)">How to participate</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Contact Us </a>
+                    </li>
+                </ul>
+                <div class="foot">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Mondelez_International_logo.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main_content">
+    <ul class="list_step">
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_current"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+    </ul>
+    <h3 class="subtitle">What would you like their song's vibe to be?</h3>
+    <div class="wallpaper_block" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
+     <div class="festoon_block">
+        <img src= {% static 'img/music.png' %}/>
+     </div>
+     <div class="question_block">
+        <img src= {% static 'img/headphone.png' %}/>
+     </div>
+     <div class="balloon_block">
+        <img src= {% static 'img/balloon.png' %} />
+     </div>
+    </div>
+    <div class="general_block" data-aos="fadeIn">
+        <h3 class="generaltitle">Mood</h3>
+        <ul class="list_unstyled">
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="mood" value ="happy" checked/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src= {% static "img/emoji.png" %} alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Happy</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="mood" value = 'romantic'/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src= {% static "img/emoji.png" %} alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Romantic</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="mood" value = "funny"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src= {% static "img/emoji.png" %} alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Funny</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="mood" value = "motivational"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src= {% static "img/emoji.png" %} alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Motivational</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="mood" value = "calm"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src= {% static "img/emoji.png" %} alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Calm</h4>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class="general_block" data-aos="fadeIn">
+        <h3 class="generaltitle">Genre</h3>
+        <ul class="list_unstyled">
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="genre" value = "happy"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src={% static "img/boombox.png" %}  alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Happy</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="genre" value ="rock" checked/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src={% static "img/boombox.png" %}  alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Rock</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="genre" value = "pop"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src={% static "img/boombox.png" %}  alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Pop</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="genre" value ="desi"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src={% static "img/boombox.png" %}  alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">Desi</h4>
+                </label>
+            </li>
+            <li>
+                <label class="field_radio">
+                    <input type="radio" name="genre" value = "electronic dance"/>
+                    <div class="box_radio">
+                        <div class="thumb">
+                            <img src={% static "img/boombox.png" %}  alt="">
+                        </div>
+                    </div>
+                    <h4 class="caption">EDM</h4>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class="btn_block">
+        <button class="btn_secondary btn" id="select_btn">Proceed</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        const csrf_token = "{{ csrf_token }}"; 
+    </script>
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    
+{% endblock %}

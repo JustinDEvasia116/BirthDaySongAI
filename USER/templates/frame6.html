@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}HTML+CSS webpage{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <div class="inner_header">
+        <a href="javascript:void(0)">
+            <img src= {% static 'img/logo.png' %} class="img_logo"/>
+        </a>
+        <div class="topnav">
+            <button type="button" class="btn_menuhamburger" id="btn_menuhamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="overlay"></div>
+            <div class="right_sidebar" id="right_sidebar">
+                <a class="btn_close" id="btn_close">&times;</a>
+                <ul class="list_unstyled">
+                    <li>
+                        <a href="javascript:void(0)">How to participate</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Contact Us </a>
+                    </li>
+                </ul>
+                <div class="foot">
+                    <img src="https://icon-library.com/images/photo-placeholder-icon/photo-placeholder-icon-14.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main_content">
+    <ul class="list_step">
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_complete"></span>
+        </li>
+        <li>
+            <span class="bullet bullet_current"></span>
+        </li>
+    </ul>
+    <div class="song_block">
+        <h5>Your unique song is ready!</h5>
+        <div class="video_content">
+            <video class="custom_video" id="videoplayer" preload="auto" loop="loop" muted>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
+            </video>           
+            <audio autoplay id="audioplayer" >
+                <source src="{{ audio_file_url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+                            
+            <a id="play" class="tap" href="javascript:void(0);">
+                <img src="https://www.freepnglogos.com/uploads/play-button-png/play-button-watch-video-understand-the-power-clarip-less-than-minute-7.png"/>
+            </a>
+            <div class="btn_block">
+                <button class="btn btn_secondary w100" id="share">Share <i class='fa fa-share'></i></button>
+                <button class="btn btn_secondary w100" id="download">Download <i class='fa fa-download'></i></button>
+            </div>
+        </div>
+        <div class="btn_block">
+            <button class="btn btn_secondary" id="btn_redeem">Redeem Gift</button>
+            <button class="btn btn_secondary">Create Again</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal_coupon" id="modal_coupon">
+    <div class="modal_overlay">
+        <div class="coupon-card">
+            <a href="javascript:void(0)" class="btn_close" id="btn_close_modal">&times;</a>
+            <h2>You have unlocked</h2>
+            <h3 data-aos="fadeIn">20%  OFF</h3>
+            <div class="coupon-row" data-aos="fadeIn">
+                <span id="cpnCode">C45869</span>
+                <span id="cpnBtn">
+                    <span class="fa fa-copy"></span>
+                </span>
+            </div>
+            <span class="txt_desc">Copy the code and tap the button
+                below to place an order.</span>
+            <button class="btn_redeem">Redeem Now</button>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var playButton = document.getElementById("play");
+        var audioElement = document.getElementById("audioplayer");
+        var videoElement = document.getElementById("videoplayer");
+        var downloadButton = document.getElementById("download");
+    
+        // Add a click event listener to the play button image
+        playButton.addEventListener("click", function () {
+            if (audioElement.paused) {
+                // Play the audio
+                audioElement.play();
+            } else {
+                // Pause the audio
+                audioElement.pause();
+            }
+    
+            if (videoElement.paused) {
+                // Play the video
+                videoElement.play();
+            } else {
+                // Pause the video
+                videoElement.pause();
+            }
+        });
+    
+        // Add a click event listener to the download button
+        downloadButton.addEventListener("click", function () {
+            // Get the audio file URL
+            var audioFileUrl = audioElement.querySelector("source").getAttribute("src");
+            
+            // Create an anchor element to trigger the download
+            var downloadLink = document.createElement("a");
+            downloadLink.href = audioFileUrl;
+            downloadLink.download = "audio_file.mp3"; // Set the desired file name
+            downloadLink.click();
+        });
+    });
+    </script>
+    
+{% endblock %}

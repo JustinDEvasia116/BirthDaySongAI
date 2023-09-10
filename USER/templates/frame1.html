@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    HTML+CSS Webpage
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <div class="inner_header">
+        <a href="javascript:void(0)">
+            {% comment %} <img src="img/logo.png" class="img_logo"/> {% endcomment %}
+            <img src="{% static 'img/logo.png' %}" alt="logo">
+        </a>
+        <div class="topnav">
+            <button type="button" class="btn_menuhamburger" id="btn_menuhamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="overlay"></div>
+            <div class="right_sidebar" id="right_sidebar">
+                <a class="btn_close" id="btn_close">&times;</a>
+                <ul class="list_unstyled">
+                    <li>
+                        <a href="javascript:void(0)">How to participate</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Contact Us </a>
+                    </li>
+                </ul>
+                <div class="foot">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Mondelez_International_logo.jpg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main_content">
+    <ul class="list_step">
+        <li>
+            <span class="bullet bullet_current"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+        <li>
+            <span class="bullet"></span>
+        </li>
+    </ul>
+    <div class="wallpaper_block" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
+        {% comment %} <img src="img/wallpaper.png" alt=""> {% endcomment %}
+        <img src="{% static 'img/wallpaper.png' %}" alt="">
+    </div>
+    <div class="fill_form">
+        <h5>Register to create</h5>
+        <form name="register-form" autocomplete="off">
+            {% csrf_token %}
+            <div class="field_group">
+                <input class="field_input" name="phone" id="phone" type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" placeholder="Phone Number"/>
+                <span id="phone"></span>
+            </div>
+            <div class="field_group">
+                <input class="field_input" name="name" id="name" type="text" placeholder="Full Name"/>
+                <span id="name"></span>
+            </div>
+            <div class="field_group">
+                <input class="field_input"  name="email" id="email" type="email" placeholder="Email ID"/>
+                <span id="email"></span>
+            </div>
+            <div class="checkbox_block">
+                <label>
+                    <input type="checkbox" id="termsCheckbox">
+                    <span class="dot"></span>
+                    <span class="txt">I accept Terms &amp; Conditions and Privacy Policy of Mondelez (Cadbury)</span>
+                </label>
+            </div>
+        </form>
+         <div class="btn_block">
+            <button class="btn_submit" id="btn_openModal" >Submit</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="addEventModal">
+    <div class="modal_overlay">
+        <div class="modal_content">
+            <h2 class="headtitle">Enter OTP</h2>
+            <form action="addnew"  class="modal_fill">
+            
+                <ul class="list_unstyled">
+                <li>
+                    <input type="number" class="field_input" min="0" max="9" oninput="this.value = this.value.slice(0, 1);">
+                </li>
+                <li>
+                    <input type="number" class="field_input" min="0" max="9" oninput="this.value = this.value.slice(0, 1);">
+                </li>
+                <li>
+                    <input type="number" class="field_input" min="0" max="9" oninput="this.value = this.value.slice(0, 1);">
+                </li>
+                <li>
+                    <input type="number" class="field_input" min="0" max="9" oninput="this.value = this.value.slice(0, 1);">
+                </li>
+                </ul>
+    <input type="hidden" id="otpValue" name="otpValue" value="">
+    <a href="javascript:void(0)" class="link_otp">Resend OTP</a>
+    <div class="btn_block">
+        <button class="btn_secondary" id="btnsubmit">Submit</button>
+    </div>
+</form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        var csrf_token = "{{ csrf_token }}";
+    </script>
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+{% endblock %}
