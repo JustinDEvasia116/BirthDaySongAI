@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic', 
+   
     'USER'
 ]
 
@@ -148,7 +148,7 @@ STATICFILES_DIRS = (
     
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'USER/static')
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
