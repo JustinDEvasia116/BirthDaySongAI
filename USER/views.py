@@ -223,12 +223,15 @@ def generate_audio(request):
     except Profiles.DoesNotExist:
         return redirect('addnew')
 
+    directory_path = os.path.join(settings.MEDIA_ROOT, 'assets', 'audiofiles')
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
     # Convert the lyrics to audio using gTTS and specify the content type as MP3
     tts = gTTS(text=generated_lyrics, lang='en', lang_check=False, slow=False)
 
     # Generate the audio file name using the user's full name
     audio_file_name = f"{full_name.replace(' ', '_')}.mp3"
-    audio_file_path = os.path.join("media", "assets", "audiofiles", audio_file_name)
+    audio_file_path = os.path.join(directory_path, audio_file_name)
     tts.save(audio_file_path)
 
     # Save the audio file to the audio_file field in the Profiles model
