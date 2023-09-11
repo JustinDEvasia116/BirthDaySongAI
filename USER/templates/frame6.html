@@ -72,7 +72,7 @@
     <div class="song_block">
         <h5>Your unique song is ready!</h5>
         <div class="video_content">
-            <video class="custom_video" id="videoplayer" preload="auto" loop="loop" muted>
+            <video class="custom_video" id="videoplayer" preload="auto" loop="loop" muted autoplay>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
             </video>           
             <audio autoplay id="audioplayer" >
@@ -138,18 +138,13 @@
             if (audioElement.paused) {
                 // Play the audio
                 audioElement.play();
+                videoElement.play();
             } else {
                 // Pause the audio
                 audioElement.pause();
-            }
-    
-            if (videoElement.paused) {
-                // Play the video
-                videoElement.play();
-            } else {
-                // Pause the video
                 videoElement.pause();
             }
+    
         });
     
         // Add a click event listener to the download button

@@ -53,7 +53,7 @@ $(document).ready(function () {
 
             // Regular expressions for validation
             var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-            var nameRegex = /^[A-Za-z]+$/; // Single Name
+            var nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
             var phoneRegex = /^\d{10}$/; // 10-digit phone number
 
             if (phone === '' || !phone.match(phoneRegex)) {
@@ -188,7 +188,8 @@ $(document).ready(function () {
             var gender = $('#gender').val();
     
             // Regular expression to check if the name contains only alphabetical characters
-            var nameRegex = /^[A-Za-z]+$/;
+            var nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
+
     
             // Flag to track validation result
             var validationPassed = true;

@@ -252,9 +252,10 @@ def Playsong(request):
     return render(request, 'frame6.html', {'audio_file_url': audio_file_url})
 
 def generate_otp(request):
-        username = request.POST['name']
+        name = request.POST['name']
         phone = request.POST['phone']
         email = request.POST['email']
+        username = name.replace(" ", "")
         
         # Generate a 4-digit OTP (you can customize the length as needed)
         otp = ''.join([str(random.randint(0, 9)) for _ in range(4)])

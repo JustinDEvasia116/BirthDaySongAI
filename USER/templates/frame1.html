@@ -149,4 +149,14 @@
         var csrf_token = "{{ csrf_token }}";
     </script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('input.field_input').on('input', function () {
+                var nextInput = $(this).closest('li').next().find('input.field_input');
+                if ($(this).val() && nextInput.length) {
+                    nextInput.focus();
+                }
+            });
+        });
+    </script>
 {% endblock %}
