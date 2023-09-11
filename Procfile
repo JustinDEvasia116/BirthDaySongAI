@@ -1,0 +1,1 @@
+web: gunicorn BirthdayRap.wsgi --log-file  -

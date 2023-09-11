@@ -9,6 +9,7 @@ import os
 from django.core.files.base import ContentFile
 from django.core.files import File
 from django.conf import settings
+from django.views.decorators.cache import never_cache, cache_control
 
 
 from django.contrib.auth import login
@@ -26,7 +27,10 @@ def Landingingpage(request):
 def Registration(request):
     return render(request,'frame1.html')
 
+@never_cache
+@cache_control(no_cache=True, max_age=0, must_revalidate=True, no_store=True)
 @login_required(login_url='register')
+
 def Add_details(request):
     
     if request.method == 'POST':
@@ -52,6 +56,7 @@ def Add_details(request):
         return render(request, 'frame2.html')
 
 @login_required(login_url='register')
+@never_cache
 def Choices(request):
     user = request.user
     try:
@@ -77,6 +82,8 @@ def Choices(request):
     return render(request, 'frame3.html')
 
 openai.api_key = settings.GPT3_SECRET_API
+@login_required(login_url='register')
+@never_cache
 def Availdetail(request):
     user = request.user
     try:
@@ -129,14 +136,35 @@ def Availdetail(request):
         except Profiles.DoesNotExist:
             # Handle the case where the user's profile does not exist
             return redirect(request, "addnew")
+        
+        gender_pronouns = {
+             "Male": ("He", "him", "His"),
+             "Female": ("She", "her", "Her"),
+    }
+        subject_pronoun, object_pronoun, possessive_pronoun = gender_pronouns[gender]
 
         # Dynamically create the input script with the requirement for at least two "Happy birthday" lines
         input_script = f"""
-Wish a happy birthday  to {full_name}.
+
+Generate one Happy Birthday song without verse for {full_name} who is turning {age}.
+Include the following details:
+- we call {object_pronoun} {petname}.
+- {angry} makes {object_pronoun} angry.
+- {funny} makes {object_pronoun} funniest.
+- {smile} makes {object_pronoun} special.
+- {movie} movie {subject_pronoun} likes the most.
+- {sport} sports {subject_pronoun} likes the most.
+- do not categorize the song into verse and chorus.
+
+The song should have at least two instances of "Happy birthday" and should rhyme.
+Lyrics should be simple, short, and easy to sing.
+
+Using the above information about {full_name}, please create a heartfelt Happy Birthday song.
+Each line can have a maximum of 8 words or 40 characters.
 
 
 """
-
+       
         # Generate lyrics using the input script
         response = openai.Completion.create(
             engine="text-davinci-003",
@@ -159,7 +187,8 @@ Wish a happy birthday  to {full_name}.
     else:
         return render(request, "frame4.html")
 
-
+@login_required(login_url='register')
+@never_cache
 def generate_lyrics(request):
     user = request.user
     try:
@@ -205,10 +234,10 @@ def generate_audio(request):
     # Save the audio file to the audio_file field in the Profiles model
     with open(audio_file_path, 'rb') as audio_file:
         profile.audio_file.save(audio_file_name, File(audio_file))
-    
+    os.remove(audio_file_path)
     return redirect('play')
 
-
+@never_cache
 def Playsong(request):
     user = request.user
     try:
@@ -268,10 +297,10 @@ def verify_otp(request):
             generated_otp = account.otp
 
             if received_otp == generated_otp:
-                # user = auth.authenticate(request, username=username, password="")
-                # if user is not None and user.is_active and not user.is_superuser:
-                #     auth.login(request, user)
-                #     print("login successfull")
+                user = auth.authenticate(request, username=username, password="")
+                if user is not None and user.is_active and not user.is_superuser:
+                    auth.login(request, user)
+                    print("login successfull")
                     
                 # OTPs match, return a success response
                 return JsonResponse({'success': True})
@@ -281,10 +310,16 @@ def verify_otp(request):
         else:
             # If no account with the provided phone number is found, return an error response
             return JsonResponse({'success': False, 'message': 'Account not found'})
-
+@never_cache
 def create_again(request):
+    user = request.user
+    try:
+        profile = Profiles.objects.filter(user=user).latest("id")
+    except Profiles.DoesNotExist:
+        return render(request,"frame2.html")
     if request.user.is_authenticated:
         # Delete profiles associated with the authenticated user
+        
         Profiles.objects.filter(user=request.user).delete()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})
