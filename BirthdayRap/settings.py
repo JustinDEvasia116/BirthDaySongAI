@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -96,18 +97,9 @@ DATABASES = {
     #     'PORT' : '5432'
         
     # }
-    
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD' : 'o3hPiI7sZCfa8ERvdzJE',
-        'HOST' : 'containers-us-west-102.railway.app',
-        'PORT' : '7674'
-        
-    }
 }
-
+database_url = os.environ.get("databaseurl")
+DATABASES["default"] = dj_database_url.parse(database_url)
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
