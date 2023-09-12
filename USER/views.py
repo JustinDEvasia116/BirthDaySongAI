@@ -255,7 +255,15 @@ def generate_otp(request):
         name = request.POST['name']
         phone = request.POST['phone']
         email = request.POST['email']
-        username = name.replace(" ", "")
+        username = phone
+        name_parts = name.split()
+
+        if len(name_parts) == 1:
+            firstname = name_parts[0]
+            lastname= ""
+        else:
+            firstname = name_parts[0]
+            lastname = ' '.join(name_parts[1:])
         
         # Generate a 4-digit OTP (you can customize the length as needed)
         otp = ''.join([str(random.randint(0, 9)) for _ in range(4)])
@@ -270,8 +278,8 @@ def generate_otp(request):
                 existing_account.save()
                 print("OTP updated for existing account")
             else:        
-                user = User.objects.create_user(username=username,email=email,password="")
-                user.save_base
+                user = User.objects.create_user(username=username,email=email,password="",first_name=firstname,last_name=lastname)
+                user.save()
                 user_id = User.objects.get(username=username)
                 account = Accounts.objects.create(user=user_id,phone=phone,otp=otp)
                 account.save()
