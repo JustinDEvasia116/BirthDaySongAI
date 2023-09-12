@@ -27,10 +27,9 @@ def Landingingpage(request):
 def Registration(request):
     return render(request,'frame1.html')
 
-@never_cache
-@cache_control(no_cache=True, max_age=0, must_revalidate=True, no_store=True)
-@login_required(login_url='register')
 
+
+@login_required(login_url='register')
 def Add_details(request):
     
     if request.method == 'POST':
@@ -83,7 +82,6 @@ def Choices(request):
 
 openai.api_key = settings.GPT3_SECRET_API
 @login_required(login_url='register')
-@never_cache
 def Availdetail(request):
     user = request.user
     try:
