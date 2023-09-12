@@ -34,15 +34,15 @@ $(document).ready(function () {
             }
         });
     });
-    $(function () {
-        window.onload = function () {
-            let player = document.getElementById("player"),
-                play = document.getElementById("play");
-            play.addEventListener("click", function () {
-                player.play();
-            });
-        }
-    });
+    // $(function () {
+    //     window.onload = function () {
+    //         let player = document.getElementById("player"),
+    //             play = document.getElementById("play");
+    //         play.addEventListener("click", function () {
+    //             player.play();
+    //         });
+    //     }
+    // });
 
     $(function () {
         $('#btn_openModal').click(function () {
@@ -353,20 +353,20 @@ $(document).ready(function () {
     });
 
 
-    $(function () {
-        $(window).on("load", function () {
-            $(".scroll_content").mCustomScrollbar({
-                theme: "dark",
-            });
-        });
-    });
-    $(function () {
-        $(window).on("load", function () {
-            $(".list_content").mCustomScrollbar({
-                theme: "dark",
-            });
-        });
-    });
+    // $(function () {
+    //     $(window).on("load", function () {
+    //         $(".scroll_content").mCustomScrollbar({
+    //             theme: "dark",
+    //         });
+    //     });
+    // });
+    // $(function () {
+    //     $(window).on("load", function () {
+    //         $(".list_content").mCustomScrollbar({
+    //             theme: "dark",
+    //         });
+    //     });
+    // });
 
     $(function () {
         $("#btn_menuhamburger").click(function () {
